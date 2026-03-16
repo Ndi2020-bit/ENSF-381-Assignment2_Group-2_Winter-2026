@@ -191,6 +191,11 @@ form button,
     border-radius: 12px;
 }
 
+/* Added for ice_cream_tile.hover */
+.ice_cream_tile:hover {
+    background-color: #f6f3f0;
+}
+
 .special_actions {
     margin-top: 10px;
 }
@@ -295,4 +300,46 @@ form button,
     justify-content: center;
     gap: 12px;
     margin-top: 20px;
+}
+
+#cart_container {
+    width: 100%;
+    
+}
+
+#cart_section {
+    align-items: stretch;
+}
+
+#cart_section h2 {
+    text-align: left;
+}
+
+.cart_row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    border: 3px solid #e4b48c;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.cart_name {
+    font-weight: bold;
+}
+
+.cart_price {
+    font-weight: normal;
+}
+
+#order_timer {
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #fff8ee;
+    border: 3px solid #e4b48c;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
