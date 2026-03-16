@@ -42,7 +42,7 @@ nav {
     background-color: #fff3e0;
     display: flex;
     justify-content: center;
-    padding: 10px;  
+    padding: 10px;
     border-bottom: 2px solid #e4b48c;
     margin-bottom: 30px;
     flex-wrap: wrap;
@@ -143,6 +143,16 @@ form button,
     padding: 8px 14px;
     border: none;
     cursor: pointer;
+}
+.signup_btn {
+    background-color: #f28c8c;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 8px 14px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;    
 }
 
 .menu_main {
