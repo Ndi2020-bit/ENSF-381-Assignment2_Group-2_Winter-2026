@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="signup.js"></script>
+</head>
+<body>
+    <header id="page_header">
+        <div>
+            <div><img src="img/logo.jpeg" alt="Sweet Scoop Ice Cream Logo"></div>
+        </div>
+
+        <div>
+            <h3>Sweet Scoop Ice Cream</h3>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+    <main class="login_main">
+        <div id="signup_container">
+            <h2>Signup</h2>
+
+            <form id="signup_form">
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username" required><br>
+
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br>
+
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required><br>
+
+                <label for="confirm_password">Confirm Password:</label><br>
+                <input type="password" id="confirm_password" name="confirm_password" required><br>
+
+                <div id="message_box"></div>
+
+                <button type="submit" class="signup_submit_btn">Sign Up</button>
+            </form>
+        </div>
+
+    </main>
+    <footer>
+        <p>&copy; 2026 Sweet Scoop Ice Cream.</p>
+    </footer>
+</body>
+</html>
