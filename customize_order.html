@@ -27,9 +27,10 @@
     </nav>
 
     <main class="customize_order_main">
-        
 
-        <form action="order_summary.html">
+        <div id="order_timer">10:00</div>
+
+        <form action="order_summary.html" onsubmit="return validateOrder()">
             <div>
                 <img src="img/icecream_banner.jpeg" alt="Banner image for customizing order" id="banner_img">
             </div>
@@ -55,6 +56,7 @@
             <button type="button" name="update_order" value="submit_toppings">Submit Selection</button>
 
             <br>
+            <p id="total_price">Total Price: $6.00</p>
             <button type="submit">Finish Order</button>
         </form>
     </main>
@@ -62,6 +64,111 @@
     <footer>
         <p>&copy; 2026 Sweet Scoop Ice Cream.</p>
     </footer>
+
+
+    <script> //ADDED JS
+let timeLeft = 600; // 10 minutes
+
+const timerDisplay = document.getElementById("order_timer");
+
+const timer = setInterval(function() {
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+    if (seconds < 10) seconds = "0" + seconds;
+    timerDisplay.textContent = minutes + ":" + seconds;
+    timeLeft--;
+    if (timeLeft < 0) {
+        clearInterval(timer);
+        window.location.href = "order_summary.html";
+    }
+}, 1000);
+
+// Grabbing base radios and toppings
+
+    const cup = document.getElementById("type_cup");
+    const cone = document.getElementById("type_cone");
+    const baseRadios = [cup, cone];
+
+const submitTypeBtn = document.querySelector('button[value="submit_icecream_type"]');
+const submitToppingsBtn = document.querySelector('button[value="submit_toppings"]');
+
+const toppings = [
+    document.getElementById("topping1"),
+    document.getElementById("topping2"),
+    document.getElementById("topping3")
+];
+
+const totalPriceEl = document.getElementById("total_price");
+
+function calculatePrice() {
+    const basePrice = 6.00;
+    const toppingPrice = 1.50;
+
+    // Check which base is selected
+    const baseSelected = baseRadios.find(r => r.checked);
+    if (!baseSelected) {
+        totalPriceEl.textContent = "Total Price: $0.00";
+        return;
+    }
+
+    // Count toppings
+    const toppingCount = toppings.filter(t => t.checked).length;
+
+    const total = basePrice + (toppingCount * toppingPrice);
+    totalPriceEl.textContent = "Total Price: $" + total.toFixed(2);
+}
+
+// Update price live when base or toppings change
+baseRadios.forEach(r => r.addEventListener("change", calculatePrice));
+toppings.forEach(t => t.addEventListener("change", calculatePrice));
+
+submitTypeBtn.addEventListener("click", function() {
+
+    if (!cup.checked && !cone.checked) {
+        alert("Please select Cup or Cone before submitting.");
+        return;
+    }
+
+});
+
+submitToppingsBtn.addEventListener("click", function() {
+
+    const toppingSelected = toppings.some(t => t.checked);
+
+    if (!toppingSelected) {
+        alert("Please select at least one topping before submitting.");
+        return;
+    }
+
+});
+
+// Form validation
+function validateOrder() {
+
+    const baseSelected = baseRadios.find(r => r.checked);
+
+    if (!baseSelected) {
+        alert("Please select Cup or Cone, and at least one topping before confirming your order.");
+        return false;
+    }
+
+    const toppingSelected = toppings.some(t => t.checked);
+
+    if (!toppingSelected) {
+        alert("Please select at least one topping.");
+        return false;
+    }
+
+    localStorage.setItem("base", baseSelected.value);
+    localStorage.setItem("toppings", toppings.filter(t => t.checked).map(t => t.value).join(", "));
+    localStorage.setItem("total", totalPriceEl.textContent.replace("Total Price: $", ""));
+
+    return true;
+}
+
+// Initial price calculation
+calculatePrice();
+</script>
 </body>
 
 </html>
