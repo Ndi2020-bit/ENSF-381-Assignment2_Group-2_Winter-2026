@@ -19,7 +19,7 @@ form.addEventListener('submit', function(e) {
     } else if (!validatePassword(password)) {
         signupMessage('Invalid password (Min 8 characters, uppercase, lowercase, number\
             special character, no spaces)')
-    } else if (!password != confirmPassword) {
+    } else if (password != confirmPassword) {
         signupMessage('Passwords do not match.')
 
     } else if (!validateEmail(email)) {
