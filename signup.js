@@ -19,14 +19,17 @@ form.addEventListener('submit', function(e) {
     } else if (!validatePassword(password)) {
         signupMessage('Invalid password (Min 8 characters, uppercase, lowercase, number\
             special character, no spaces)')
-    } else if (!password != confirmPassword) {
+    } else if (password != confirmPassword) {
         signupMessage('Passwords do not match.')
 
     } else if (!validateEmail(email)) {
         signupMessage('Invalid email (Must contain @ and end with .com, .net, or .io)')
     } else {
         signupMessage('Account created successfully')
-        window.location.href = 'login.html';
+        // Added a timeout for the client to see the message
+        setTimeout(function() {
+            window.location.href = 'login.html';
+        }, 2000);
     }
 })
 

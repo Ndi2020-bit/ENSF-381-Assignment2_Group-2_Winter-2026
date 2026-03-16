@@ -23,7 +23,10 @@ form.addEventListener('submit', function(e) {
             if (foundUser) {
                 if (foundUser.email === password) {
                     loginMessage('Login Successful');
-                    window.location.href = 'menu_view.html';
+                    // Added timeout for the message to load
+                    setTimeout(function() {
+                        window.location.href = 'menu_view.html';
+                    }, 2000);
                 } else {
                     loginMessage('Wrong Credentials');
                 }
