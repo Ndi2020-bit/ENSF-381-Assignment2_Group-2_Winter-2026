@@ -17,7 +17,7 @@ form.addEventListener('submit', function(e) {
             (letters A-Z, numbers 0-9), hyphens(-), and underscores (_)\
             must start with a letter, cannot contain spaces or special characters other than hyphens and underscores.')
     } else if (!validatePassword(password)) {
-        signupMessage('Invalid password (Min 8 characters, uppercase, lowercase, number\
+        signupMessage('Invalid password (Min 8 characters, uppercase, lowercase, number,\
             special character, no spaces)')
     } else if (password != confirmPassword) {
         signupMessage('Passwords do not match.')
@@ -34,7 +34,7 @@ form.addEventListener('submit', function(e) {
 })
 
 function validateUsername(username) {
-    const regex = /^[A-Za-z][A-Za-z0-9 -]{2,19}$/;
+    const regex = /^[A-Za-z][A-Za-z0-9_-]{2,19}$/;
     return regex.test(username);
 }
 
