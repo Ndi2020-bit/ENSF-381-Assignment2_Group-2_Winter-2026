@@ -28,26 +28,27 @@
 
     <main class="order_summary_main">
         <h2>Order Summary</h2>
-        <table>
+         <div id="order_summary_container"></div>
+        <!--<table>
             <tbody>
                 <tr>
                     <td>Flavor</td>
-                    <td>Vanilla Dream</td>
+                    <td id="flavor_cell">Vanilla Dream</td>
                 </tr>
                 <tr>
-                    <td>Type</th>
+                     <td id="type_cell">--</td>
                     <td>Cone</td>
                 </tr>
                 <tr>
-                    <td>Toppings</th>
+                     <td id="toppings_cell">--</td>
                     <td>Sprinkles, Nuts</td>
                 </tr>
                 <tr>
-                    <td>Price</th>
+                    <td id="price_cell">$0.00</td>
                     <td>$6.50</td>
                 </tr>
             </tbody>
-        </table>
+        </table> -->
 
         <div class="summary_actions">
             <a href="customize_order.html" class="action_btn">Edit Order</a>
@@ -58,6 +59,24 @@
     <footer>
         <p>&copy; 2026 Sweet Scoop Ice Cream.</p>
     </footer>
+
+    <script> //ADDED JS
+    const container = document.getElementById("order_summary_container");
+
+const flavor = localStorage.getItem("flavor") || "Vanilla Dream";
+const base = localStorage.getItem("base") || "--";
+const toppings = localStorage.getItem("toppings") || "--";
+const total = parseFloat(localStorage.getItem("total") || 6).toFixed(2);
+
+container.innerHTML = `
+  <table>
+    <tr><td>Flavor</td><td>${flavor}</td></tr>
+    <tr><td>Type</td><td>${base}</td></tr>
+    <tr><td>Toppings</td><td>${toppings}</td></tr>
+    <tr><td>Price</td><td>$${total}</td></tr>
+  </table>
+`;
+</script>
 </body>
 
 </html>
