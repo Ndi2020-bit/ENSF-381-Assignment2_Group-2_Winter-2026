@@ -98,8 +98,8 @@
                     <img src="img/icecream.jpg" alt="Peppermint ice cream">
                     <p><strong>Price:</strong> $5.99</p>
                     <div class="special_actions">
-                        <button class="add_btn">Add</button>
-                        <button class="remove_btn">Remove</button>
+                        <button class="add_btn" data-name="Peppermint Snow" data-price="5.99">Add</button>
+                        <button class="remove_btn" data-name="Peppermint Snow" data-price="5.99">Remove</button>
                     </div>
                 </article>
 
@@ -108,8 +108,8 @@
                     <img src="img/icecream.jpg" alt="Caramel ice cream scoop">
                     <p><strong>Price:</strong> $6.49</p>
                     <div class="special_actions">
-                        <button class="add_btn">Add</button>
-                        <button class="remove_btn">Remove</button>
+                        <button class="add_btn" data-name="Caramel Apple Crunch" data-price="6.49">Add</button>
+                        <button class="remove_btn" data-name="Caramel Apple Crunch" data-price="6.49">Remove</button>
                     </div>
                 </article>
 
@@ -118,17 +118,102 @@
                     <img src="img/icecream.jpg" alt="Maple pecan ice cream">
                     <p><strong>Price:</strong> $6.29</p>
                     <div class="special_actions">
-                        <button class="add_btn">Add</button>
-                        <button class="remove_btn">Remove</button>
+                        <button class="add_btn" data-name="Maple Pecan Delight" data-price="6.29">Add</button>
+                        <button class="remove_btn" data-name="Maple Pecan Delight" data-price="6.29">Remove</button>
                     </div>
                 </article>
             </div>
         </section>
+
+        <section id="cart_section">
+    <h2>Cart</h2>
+
+    <div id="cart_container">
+        <p id="cart_empty">No items in cart.</p>
+    </div>
+</section>
     </main>
 
     <footer>
         <p>&copy; 2026 Sweet Scoop Ice Cream.</p>
     </footer>
+
+    
+    <script> //Added JS
+const cart = {};
+
+const cartContainer = document.getElementById("cart_container");
+const emptyMessage = document.getElementById("cart_empty");
+
+function updateCartUI() {
+
+    cartContainer.innerHTML = "";
+
+    const items = Object.values(cart);
+
+    if (items.length === 0) {
+        cartContainer.appendChild(emptyMessage);
+        return;
+    }
+
+    items.forEach(item => {
+
+        const row = document.createElement("div");
+        row.classList.add("cart_row");
+
+        const nameQty = document.createElement("span");
+        nameQty.classList.add("cart_name");
+        nameQty.textContent = `${item.name} (${item.qty})`;
+
+        const total = document.createElement("span");
+        total.classList.add("cart_price");
+        total.textContent = `$${(item.qty * item.price).toFixed(2)}`;
+
+        row.appendChild(nameQty);
+        row.appendChild(total);
+
+        cartContainer.appendChild(row);
+
+    });
+}
+const addButtons = document.getElementsByClassName("add_btn");
+for (let btn of addButtons) {
+
+    btn.addEventListener("click", () => {
+
+        const name = btn.dataset.name;
+        const price = parseFloat(btn.dataset.price);
+
+        if (!cart[name]) {
+            cart[name] = { name, price, qty: 0 };
+        }
+
+        cart[name].qty++;
+
+        updateCartUI();
+    });
+}
+
+const removeButtons = document.getElementsByClassName("remove_btn");
+for (let btn of removeButtons) {
+
+    btn.addEventListener("click", () => {
+
+        const name = btn.dataset.name;
+
+        if (!cart[name]) return;
+
+        cart[name].qty--;
+
+        if (cart[name].qty <= 0) {
+            delete cart[name];
+        }
+
+        updateCartUI();
+    });
+
+};
+</script>
 </body>
 
 </html>
